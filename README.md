@@ -1,6 +1,6 @@
 # FTPFileUpload
 
-![Build](./.github/workflows/dotnet.yml/badge.svg)
+![Build](./.github/workflows/dotnet.yml)
 
 NAME 
 
