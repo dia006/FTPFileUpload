@@ -23,3 +23,5 @@ jobs:
       run: dotnet build --no-restore ./FTPFileUpload/FTPFileUpload.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal ./FTPFileUpload/FTPFileUpload.sln
+    - name: FTP publish
+      run: dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained true ./FTPFileUpload/FTPFileUpload.sln
