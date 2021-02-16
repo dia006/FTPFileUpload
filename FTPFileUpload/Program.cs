@@ -9,7 +9,7 @@ namespace FTPFileUpload
 		static async System.Threading.Tasks.Task Main(string[] args)
 		{
 			Arguments oArguments = new Arguments(args);
-
+// https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools-how-to-create
 			if (oArguments.IsEmpty)
 			{
 				var versionString = Assembly.GetEntryAssembly()
