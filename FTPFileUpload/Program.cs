@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using CoreFtp;
 
 namespace FTPFileUpload
