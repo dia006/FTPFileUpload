@@ -12,6 +12,12 @@ namespace FTPFileUpload
 
 			if (oArguments.IsEmpty)
 			{
+				var versionString = Assembly.GetEntryAssembly()
+                                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                                .InformationalVersion
+                                .ToString();
+
+        		Console.WriteLine($"FTPFileUpload v{versionString}");
 				Console.WriteLine("-------------------------------------------------");
 				Console.WriteLine("- COMMAND LINE HELP (* for mandatory arguments) -");
 				Console.WriteLine("-------------------------------------------------");
