@@ -10,15 +10,16 @@ namespace FTPFileUpload
 		static async System.Threading.Tasks.Task Main(string[] args)
 		{
 			Arguments oArguments = new Arguments(args);
-// https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools-how-to-create
+
+			// https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools-how-to-create
 			if (oArguments.IsEmpty)
 			{
 				var versionString = Assembly.GetEntryAssembly()
-                                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                                .InformationalVersion
-                                .ToString();
+																.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+																.InformationalVersion
+																.ToString();
 
-        		Console.WriteLine($"FTPFileUpload v{versionString}");
+				Console.WriteLine($"FTPFileUpload v{versionString}");
 				Console.WriteLine("-------------------------------------------------");
 				Console.WriteLine("- COMMAND LINE HELP (* for mandatory arguments) -");
 				Console.WriteLine("-------------------------------------------------");
@@ -26,8 +27,8 @@ namespace FTPFileUpload
 				Console.WriteLine("-Username=<string>        *");
 				Console.WriteLine("-Password=<string>        *");
 				Console.WriteLine("-Host=<string>            *");
-				Console.WriteLine("-File=<string>            *");
-				Console.WriteLine("-RemoteDirectory=<string> *");
+				Console.WriteLine("-FileName=<string>            *");
+				Console.WriteLine("-BaseDirectory=<string> *");
 
 				return;
 			}
@@ -38,7 +39,7 @@ namespace FTPFileUpload
 			string sFileName = oArguments.GetParameter("FileName", string.Empty);
 			string sBaseDirectory = oArguments.GetParameter("BaseDirectory", string.Empty);
 
-			using (var ftpClient = new FtpClient(new FtpClientConfiguration
+			using (var oClient = new FtpClient(new FtpClientConfiguration
 			{
 				Host = sHost,
 				Username = sUsername,
@@ -46,14 +47,14 @@ namespace FTPFileUpload
 				BaseDirectory = sBaseDirectory
 			}))
 			{
-				await ftpClient.LoginAsync();
+				await oClient.LoginAsync();
 
-				FileInfo oFile = new FileInfo(sFileName);
-				using (var ftpReadStream = await ftpClient.OpenFileReadStreamAsync(sFileName))
+				using (var oWriteStream = await oClient.OpenFileWriteStreamAsync(sFileName))
 				{
-					using (var fileWriteStream = oFile.OpenWrite())
+					FileInfo oFile = new FileInfo(sFileName);
+					using (var oReader = oFile.OpenRead())
 					{
-						await ftpReadStream.CopyToAsync(fileWriteStream);
+						await oReader.CopyToAsync(oWriteStream);
 					}
 				}
 			}

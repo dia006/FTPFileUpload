@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FTPFileUpload": {
+      "commandName": "Project",
+      "commandLineArgs": "-Username=1710475@aruba.it -Password=dia006afasnar -Host=ftp.mkasolutions.eu -FileName=FTPFileUpload.pdb -BaseDirectory=\"/mkasolutions.eu/Streams/Agents\""
+    }
+  }
+}
